@@ -1,5 +1,11 @@
 package org.ed06.model;
 
+/**
+ * Clase que representa a una habitación del hotel
+ *
+ * @author Daniel Martiñan
+ */
+
 public class Habitacion {
     private int numero;
     private String tipo; // "SIMPLE", "DOBLE", "SUITE"
@@ -29,17 +35,6 @@ public class Habitacion {
 
     public boolean isDisponible() {
         return disponible;
-    }
-
-    // Método que usa un switch para determinar el número máximo de huéspedes
-    public double obtenerNumMaxHuespedes() {
-        return switch (tipo) {
-            case "SIMPLE" -> 1;
-            case "DOBLE" -> 3;
-            case "SUITE" -> 4;
-            case "LITERAS" -> 8;
-            default -> 1;
-        };
     }
 
     public void reservar() {

@@ -1,5 +1,11 @@
 package org.ed06.model;
 
+/**
+ * Clase que representa a un Cliente de un hotel
+ *
+ * @author Daniel Martiñan
+ */
+
 public class Cliente {
     public int id;
     public String nombre;

@@ -1,7 +1,12 @@
 package org.ed06.model;
 
 import java.time.LocalDate;
-import java.util.Date;
+
+/**
+ * Clase que representa una reserva del hotel
+ *
+ * @author Daniel Martiñan
+ */
 
 public class Reserva {
     private int id;
@@ -24,10 +29,6 @@ public class Reserva {
         return id;
     }
 
-    public Habitacion getHabitacion() {
-        return habitacion;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -40,40 +41,34 @@ public class Reserva {
         return fechaFin;
     }
 
-    public double getPrecioTotal() {
-        return precioTotal;
-    }
-
-    // Calcula el precio total de la reserva. Para calcular el precio total, se debe calcular el precio base de la habitación por el número de noches de la reserva. En el caso de que el cliente sea vip, se aplicará un descuento del 10%. Además, si el intervalo de fechas es mayor a 7 días, se aplicará un descuento adicional del 5%.
+    /**
+     * Calcula el precio total de la reserva. Si el cliente es VIP tendrá un descuento del 10%. Si la estancia es de más de 7 días, tendrá un descuento del 5%.
+     *
+     * @return precioFinal Devuelve el precio final con descuentos (si los tiene).
+     */
+//
     // Devuelve precio total de la reserva
     public double calcularPrecioFinal() {
         //calculamos los días de la reserva
-        int n = fechaFin.getDayOfYear() - fechaInicio.getDayOfYear();
-        // Calculamos el precio base de la habitación por el número de noches de la reserva
-        double pb = habitacion.getPrecioBase() * n;
-        // Declaramos la variable para almacenar el precio final
-        double pf = pb;
+        int diasEstancia = fechaFin.getDayOfYear() - fechaInicio.getDayOfYear();
+        /* Declaramos la variable para almacenar el precio final
+        Este se calcula multiplicando el precio base de la habitación por el número de noches de la reserva */
+        double precioFinal = habitacion.getPrecioBase() * diasEstancia;
+
+        final double descuentoVIP = 0.9;
+        final double descuentoLargaEstancia = 0.95;
 
         // Si el cliente es VIP, aplicamos un descuento del 10%
         if (cliente.esVip) {
-            pf *= 0.9;
+            precioFinal *= descuentoVIP;
         }
 
         // Si el intervalo de fechas es mayor a 7 días, aplicamos un descuento adicional del 5%
-        if (n > 7) {
-            pf *= 0.95;
+        if (diasEstancia > 7) {
+            precioFinal *= descuentoLargaEstancia;
         }
 
         // Devolvemos el precio final
-        return pf;
-    }
-
-    public void mostrarReserva() {
-        System.out.println("Reserva #" + id);
-        System.out.println("Habitación #" + habitacion.getNumero() + " - Tipo: " + habitacion.getTipo() + " - Precio base: " + habitacion.getPrecioBase());
-        System.out.println("Cliente: " + cliente.nombre);
-        System.out.println("Fecha de inicio: " + fechaInicio.toString());
-        System.out.println("Fecha de fin: " + fechaFin.toString());
-        System.out.printf("Precio total: %.2f €\n", precioTotal);
+        return precioFinal;
     }
 }

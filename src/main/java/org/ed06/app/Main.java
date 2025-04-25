@@ -7,6 +7,12 @@ import org.ed06.model.Hotel;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Clase main.
+ *
+ * @author Daniel Martiñan
+ */
+
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     // Definimos constantes para las diferentes opciones del menú
