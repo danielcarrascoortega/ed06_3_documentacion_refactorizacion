@@ -108,7 +108,7 @@ public class Hotel {
      * @param cliente Clase cliente que representa a un cliente
      * @param numReservas Número de reservas hechas por el cliente.
      */
-    private void volverseVIP(Cliente cliente, int numReservas) {
+    public void volverseVIP(Cliente cliente, int numReservas) {
         for (List<Reserva> reservasHabitacion : reservasPorHabitacion.values()) {
             for(Reserva reservaCliente : reservasHabitacion) {
                 if(reservaCliente.getCliente().equals(cliente)) {
